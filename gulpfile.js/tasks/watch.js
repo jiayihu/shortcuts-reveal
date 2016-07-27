@@ -1,16 +1,16 @@
-var config = require('../config.json');
-var gulp = require('gulp');
-var path = require('path');
+const config = require('../config.json');
+const gulp = require('gulp');
+const path = require('path');
 
-var watchTask = function() {
-  var watchableTasks = ['css', 'html', 'images', 'fonts', 'svgSprite'];
+const watchTask = function () {
+  const watchableTasks = ['css', 'html', 'images', 'fonts', 'svgSprite', 'static'];
 
-  watchableTasks.forEach(function(taskName) {
-    var task = config.tasks[taskName];
-    if(task) {
-      var glob = [];
-      task.extensions.forEach(function(extension) {
-        glob.push( path.join(config.root.src, task.src, '**/*.' + extension) );
+  watchableTasks.forEach(function (taskName) {
+    const task = config.tasks[taskName];
+    if (task) {
+      const glob = [];
+      task.extensions.forEach(function (extension) {
+        glob.push(path.join(config.root.src, task.src, '**/*.' + extension));
       });
       gulp.watch(glob, [taskName]);
     }

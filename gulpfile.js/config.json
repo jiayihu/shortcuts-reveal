@@ -20,7 +20,7 @@
         "browsers": ["last 3 version"]
       },
       "sass": {
-        "indentedSyntax": true
+        "indentedSyntax": false
       },
       "cssnano": {
 
@@ -51,6 +51,7 @@
 
     "scripts": {
       "main": "index.js",
+      "webpage": "webpage.js",
       "src": "javascripts",
       "dest": "js",
       "extensions": ["js", "jsx"]
@@ -58,7 +59,8 @@
 
     "static": {
       "src": "static",
-      "dest": "./"
+      "dest": "./",
+      "extensions": ["js"]
     }
   }
 }

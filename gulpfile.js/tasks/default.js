@@ -1,9 +1,9 @@
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
 
-var defaultTask = function() {
+const defaultTask = function () {
   runSequence(
-    ['html', 'css', 'scripts', 'vendorScripts'],
+    ['html', 'css', 'webpage', 'scripts'],
     ['fonts', 'images', 'static'],
     'watch'
   );

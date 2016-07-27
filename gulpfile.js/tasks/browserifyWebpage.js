@@ -8,10 +8,9 @@ const gulpif = require('gulp-if');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const path = require('path');
-const browserSync = require('browser-sync');
 
 const paths = {
-  src: path.join(config.root.src, config.tasks.scripts.src, config.tasks.scripts.main),
+  src: path.join(config.root.src, config.tasks.scripts.src, config.tasks.scripts.webpage),
   dest: path.join(config.root.dest, config.tasks.scripts.dest),
 };
 
@@ -21,10 +20,9 @@ const customOpts = {
   cache: {},
   debug: !isProduction,
   entries: paths.src,
-  extensions: ['.jsx'],
   packageCache: {},
   transform: [
-    ['babelify', { presets: ['es2015', 'react'] }],
+    ['babelify', { presets: ['es2015'] }],
     ['browserify-shim'],
   ],
 };
@@ -35,14 +33,13 @@ const buildApp = function () {
   return appBundle
     .bundle()
     .on('error', console.log)
-    .pipe(source('main.js'))
+    .pipe(source('webpage.js'))
     .pipe(buffer())
     .pipe(gulpif(isProduction, uglify()))
     .on('error', console.log)
-    .pipe(gulp.dest(paths.dest))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(paths.dest));
 };
 
 appBundle.on('update', buildApp);
 
-gulp.task('scripts', buildApp);
+gulp.task('webpage', buildApp);
