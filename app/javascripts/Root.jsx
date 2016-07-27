@@ -1,37 +1,34 @@
 import React from 'react';
+import ShortcutList from './components/ShortcutList.jsx';
+import websites from './websites';
 
 export default class Root extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'Hello',
+      domain: '',
     };
-
-    this.onExtensionOpen = this.onExtensionOpen.bind(this);
   }
 
   componentDidMount() {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      console.log('Sending the message from the popup...');
-      const msg = {
-        type: 'get-shortcuts',
-      };
-      chrome.tabs.sendMessage(tabs[0].id, msg, (response) => {
-        console.log('Received msg from content script', response);
+    if (chrome && chrome.tabs) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const msg = { type: 'sr-get-url' };
+        chrome.tabs.sendMessage(tabs[0].id, msg, (hostname) => {
+          const splitted = hostname.split('.');
+          this.setState({
+            domain: splitted[splitted.length - 2],
+          });
+        });
       });
-    });
-  }
-
-  onExtensionOpen(data) {
-    console.log(data);
-    this.setState({
-      title: data,
-    });
+    }
   }
 
   render() {
     return (
-      <div>{this.state.title}</div>
+      <div>
+        <ShortcutList shortcuts={websites[this.state.domain] || websites.youtube} />
+      </div>
     );
   }
 }

@@ -10,7 +10,7 @@ const buffer = require('vinyl-buffer');
 const path = require('path');
 
 const paths = {
-  src: path.join(config.root.src, config.tasks.scripts.src, config.tasks.scripts.webpage),
+  src: path.join(config.root.src, config.tasks.scripts.src, config.tasks.scripts.contentScript),
   dest: path.join(config.root.dest, config.tasks.scripts.dest),
 };
 
@@ -33,7 +33,7 @@ const buildApp = function () {
   return appBundle
     .bundle()
     .on('error', console.log)
-    .pipe(source('webpage.js'))
+    .pipe(source('content-script.js'))
     .pipe(buffer())
     .pipe(gulpif(isProduction, uglify()))
     .on('error', console.log)
@@ -42,4 +42,4 @@ const buildApp = function () {
 
 appBundle.on('update', buildApp);
 
-gulp.task('webpage', buildApp);
+gulp.task('content-script', buildApp);

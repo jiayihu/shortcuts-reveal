@@ -4,8 +4,8 @@ const runSequence = require('run-sequence');
 const productionTask = function () {
   runSequence(
     'clean',
-    ['fonts', 'images', 'static'],
-    ['html', 'css', 'scripts']
+    ['fonts', 'static'],
+    ['html', 'css', 'content-script', 'scripts']
   );
 };
 

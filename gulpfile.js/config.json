@@ -51,7 +51,7 @@
 
     "scripts": {
       "main": "index.js",
-      "webpage": "webpage.js",
+      "contentScript": "content-script.js",
       "src": "javascripts",
       "dest": "js",
       "extensions": ["js", "jsx"]

@@ -3,8 +3,8 @@ const runSequence = require('run-sequence');
 
 const defaultTask = function () {
   runSequence(
-    ['html', 'css', 'webpage', 'scripts'],
-    ['fonts', 'images', 'static'],
+    ['html', 'css', 'content-script', 'scripts'],
+    ['images', 'static'],
     'watch'
   );
 };

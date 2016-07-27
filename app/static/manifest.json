@@ -17,8 +17,5 @@
     }
   ],
   "permissions": [
-  ],
-  "web_accessible_resources": [
-    "js/webpage.js"
   ]
 }

@@ -1,3 +1,6 @@
-body {
-  background: aquamarine;
-}
+@import 'variables';
+
+@import 'globals';
+
+@import 'components/shortcut-list';
+@import 'components/shortcut';
